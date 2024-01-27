@@ -1,8 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule} from '@angular/material/card';
-import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { AppModule } from '../app.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -13,18 +10,11 @@ describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-
-
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       imports: [
-       MatToolbarModule,
-       MatCardModule,
-       MatFormFieldModule,
-       MatInputModule,
-       ReactiveFormsModule,
-       BrowserAnimationsModule
+        AppModule 
       ],
     })
     .compileComponents();
@@ -36,6 +26,24 @@ describe('LoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should require username and password', () => {
+    component.loginForm.setValue({
+      "username": "", 
+      "password": "", 
+    });
+
+    expect(component.loginForm.valid).toEqual(false);
+  });
+
+  it('should accept username and password', () => {
+    component.loginForm.setValue({
+      "username": "Username", 
+      "password": "password", 
+    });
+
+    expect(component.loginForm.valid).toEqual(true);
   });
 
 

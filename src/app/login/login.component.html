@@ -8,12 +8,14 @@
             <div class="col-md-9 col-lg-8 mx-auto">
               <h3 class="login-heading mb-4">Welcome back!</h3>
 
+              <!-- Sign In Form -->
               <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-floating mb-3">
                 <mat-form-field class="example-full-width" style="width:20vw" appearance="outline">
                   <mat-label>Username</mat-label>
                   <input matInput id="username" formControlName="username" placeholder="Username" required>
-                        
+                        <mat-error *ngIf="loginForm.controls['username'].errors?.['required'] &&
+                  loginForm.controls['username'].touched">Username is Required </mat-error>
                 </mat-form-field>
               </div>
                 
@@ -22,12 +24,13 @@
                     <mat-label>Password</mat-label>
                     <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
                     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                   
+                    <mat-error *ngIf="loginForm.controls['password'].errors?.['required'] &&
+                    loginForm.controls['password'].touched">Password is Required </mat-error>
                   </mat-form-field>
                 </div>
 
                 <div class="d-grid">
-                 
+                  <mat-error *ngIf="loginFailed">Username or password is incorrect</mat-error>
                   <button class="btn btn-lg btn-primary btn-login text-uppercase fw-bold mb-2" style="width:20vw" type="submit">Sign in</button>
                 </div>
 
