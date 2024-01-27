@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
 import { Router, RouterModule, Routes } from '@angular/router';
 
 
@@ -26,6 +27,7 @@ export class LoginComponent {
 
   constructor(
     private formBuilder: FormBuilder,
+    private auth: AuthService,
     private router: Router
   ) {}
 
@@ -46,8 +48,14 @@ export class LoginComponent {
     const username = this.loginForm.get(['username'])?.value;
     const password = this.loginForm.get(['password'])?.value;
 
-    console.log(username + password)
-    
+    this.auth.login(username, password).subscribe((data) => {
+
+      if(data.error == 'false'){
+        this.router.navigate(['home']);
+      } else {
+        this.loginFailed = true;
+      }
+    })
       
     }
   }
