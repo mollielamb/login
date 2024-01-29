@@ -1,6 +1,10 @@
-# LoginExample
+# Login Example
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.10.
+
+## Login Details
+
+To log in use the following details: username: Username and password: password.
 
 ## Development server
 
